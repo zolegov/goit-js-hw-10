@@ -4,29 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>timer</title>
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
     <div><a href="./index.html">go back</a></div>
-    <input type="text" id="datetime-picker" />
-    <button type="button" data-start disabled>Start</button>
 
-    <div class="timer">
-      <div class="field">
-        <span class="valueDays" data-days>00</span>
-        <span class="label">Days</span>
+    <div class="wrapper">
+      <div class="input-field">
+        <input type="text" id="datetime-picker" />
+        <button type="button" data-start disabled class="btn">Start</button>
       </div>
-      <div class="field">
-        <span class="valueHours" data-hours>00</span>
-        <span class="label">Hours</span>
-      </div>
-      <div class="field">
-        <span class="valueMinute" data-minutes>00</span>
-        <span class="label">Minutes</span>
-      </div>
-      <div class="field">
-        <span class="valueSec" data-seconds>00</span>
-        <span class="label">Seconds</span>
+
+      <div class="timer">
+        <div class="field">
+          <span class="value valueDays" data-days>00</span>
+          <span class="label">Days</span>
+        </div>
+        <div class="field">
+          <span class="value valueHours" data-hours>00</span>
+          <span class="label">Hours</span>
+        </div>
+        <div class="field">
+          <span class="value valueMinute" data-minutes>00</span>
+          <span class="label">Minutes</span>
+        </div>
+        <div class="field">
+          <span class="value valueSec" data-seconds>00</span>
+          <span class="label">Seconds</span>
+        </div>
       </div>
     </div>
 

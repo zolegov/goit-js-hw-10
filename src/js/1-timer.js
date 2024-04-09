@@ -7,7 +7,7 @@ import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
 
-const button = document.querySelector('button');
+const button = document.querySelector('.btn');
 button.setAttribute('disabled', '');
 const datetimePicker = document.querySelector('#datetime-picker'); // input
 const valueDays = document.querySelector('.valueDays');
@@ -46,7 +46,8 @@ const options = {
 
     if (timeNow > Date.parse(selectedDates[0])) {
       iziToast.error({
-        //title: 'Error',
+        backgroundColor: 'rgb(239, 64, 64)',
+        messageColor: 'white',
         message: 'Please choose a date in the future',
         position: 'topRight',
       });
@@ -54,6 +55,7 @@ const options = {
     } else {
       userSelectedDate = Date.parse(selectedDates[0]);
       button.removeAttribute('disabled', '');
+      button.style.backgroundColor = '#4e75ff';
     }
   },
 };
@@ -100,32 +102,33 @@ flatpickr('#datetime-picker', options);
 function addLeadingZero(value) {
   return value.toString().padStart(2, 0);
 }
-console.log(addLeadingZero(5));
+
 button.addEventListener('click', () => {
   function timeGo() {
+    button.style.backgroundColor = 'rgb(207, 207, 207)';
+    button.style.cursor = 'default';
+    datetimePicker.style.cursor = 'default';
     const currentTime = Date.now(); // Отримуємо поточний час
     const timeDifference = userSelectedDate - currentTime; // Обчислюємо різницю в часі
     const { days, hours, minutes, seconds } = convertMs(timeDifference);
 
+    button.setAttribute('disabled', '');
     if (timeDifference <= 0) {
       clearInterval(intervalId);
       datetimePicker.removeAttribute('disabled');
-      button.setAttribute('disabled', '');
+
       return;
     }
 
-    valueDays.innerHTML = days;
+    valueDays.innerHTML = addLeadingZero(days);
     valueHours.innerHTML = addLeadingZero(hours);
     valueMinute.innerHTML = addLeadingZero(minutes);
     valueSec.innerHTML = addLeadingZero(seconds);
   }
 
-  datetimePicker.setAttribute('disabled', ''); // Деактивуємо input, щоб користувач не міг змінити дату
-  button.setAttribute('disabled', ''); // Деактивуємо кнопку, щоб користувач не міг клікнути на неї ще раз
-
-  // Викликаємо функцію timeGo() один раз, щоб одразу відобразити час
+  datetimePicker.setAttribute('disabled', '');
+  button.setAttribute('disabled', '');
   timeGo();
 
-  // Запускаємо інтервал, який викликає функцію timeGo() кожну секунду
   intervalId = setInterval(timeGo, 1000);
 });
